@@ -1,0 +1,30 @@
+<!--src/main/resources/templates/todos.html-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Todo List</title>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <form th:action="@{/todos}" method="post">
+      <input type="text" name="title" placeholder="Title" />
+      <input type="text" name="description" placeholder="Description" />
+      <select name="priority">
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <button type="submit">Add Todo</button>
+    </form>
+    <ul>
+      <li th:each="todo : ${todos}">
+        <span th:text="${todo.title}"></span>
+        <span th:text="${todo.description}"></span>
+        <span th:text="${todo.priority}"></span>
+        <form th:action="@{/todos/{id}/delete(id=${todo.id})}" method="post">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    </ul>
+  </body>
+</html>
